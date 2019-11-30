@@ -19,6 +19,9 @@ import { environment } from "../environments/environment";
 import { HomeComponent } from "./page/client/home/home.component";
 import { MenuclientComponent } from "./page/client/menuclient/menuclient.component";
 import { ProfileComponent } from "./page/profile/profile.component";
+import { HistoryComponent } from "./page/client/history/history.component";
+import { PageNotFoundComponent } from "./page/page-not-found/page-not-found.component";
+import { ListreservationComponent } from "./page/client/listreservation/listreservation.component";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { ProfileComponent } from "./page/profile/profile.component";
     SignupComponent,
     HomeComponent,
     MenuclientComponent,
-    ProfileComponent
+    ProfileComponent,
+    HistoryComponent,
+    PageNotFoundComponent,
+    ListreservationComponent
   ],
   entryComponents: [],
   imports: [

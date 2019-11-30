@@ -1,0 +1,101 @@
+<ion-menu side="start" menuId="first">
+  <ion-header>
+    <ion-toolbar translucent color="warning">
+      <ion-title>liste de reservation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../../assets/img/avatar.svg">
+        </ion-avatar>
+        <ion-label>
+          <h2>Hatem ghozzi</h2>
+          <h3>hatem@admin.com</h3>
+
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="routpage('/home')">
+
+        <ion-icon name="home" slot="start"></ion-icon>
+
+        <ion-label>Accueille</ion-label>
+      </ion-item>
+      <ion-item (click)="routpage('/profile')">
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Profile</ion-label>
+      </ion-item>
+      <ion-item (click)="routpage('/histoire')">
+        <ion-icon name="time" slot="start"></ion-icon>
+        <ion-label>Histoire</ion-label>
+      </ion-item>
+      <ion-item (click)="routpage('/login')">
+        <ion-icon name="settings" slot="start"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" main>
+  <ion-header>
+    <ion-toolbar color="warning">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>liste de reservation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <h1><strong>mon liste de reservation de taxi</strong></h1>
+
+    <ng-container *ngIf="(listereservation$ | async) as reservations; else loading">
+
+      <ion-card *ngFor="let reservation of reservations; let i = index">
+        <ion-item>
+          <ion-label>ID : {{reservation.iduser}}</ion-label>
+
+          <ion-badge slot="end" color="danger">{{reservation.stats}}</ion-badge>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="arrow-dropdown-circle" class="st" slot="start"></ion-icon>
+          <ion-label>{{reservation.Arrivee }}</ion-label>
+
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="pin" class="ed" slot="start"></ion-icon>
+          <ion-label>{{reservation.Depart }}</ion-label>
+
+        </ion-item>
+
+        <ion-item>
+
+          <ion-label>{{reservation.date }}</ion-label>
+
+          <img src="../../../../assets/img/cars-icon-10.jpg" alt="" class="img-car" slot="end">
+
+        </ion-item>
+
+        <!--     <ion-card-content>
+          nom de chauffer : samir
+        </ion-card-content> -->
+
+      </ion-card>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="warning" (click)="ajoute()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+
+    </ng-container>
+    <ng-template #loading>
+      <div class="col-12 text-center">
+        <!--  <app-loading-spinners></app-loading-spinners> -->
+        <div class="text-menuted">Loading...</div>
+      </div>
+    </ng-template>
+
+  </ion-content>
+</div>

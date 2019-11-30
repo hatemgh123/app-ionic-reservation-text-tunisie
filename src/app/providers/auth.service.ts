@@ -34,15 +34,6 @@ export class AthuService {
     toast.present();
   }
 
-  /*   .authState.subscribe(auth => {
-        this.authState = auth;
-      }); */
-
-  // Returns true if user is logged in
-  /*   get authenticated(): boolean {
-        return this.authState !== null;
-      } */
-
   emailLogin(form) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(form.email, form.password)
@@ -51,5 +42,9 @@ export class AthuService {
         this.router.navigate(["/home"]);
       })
       .catch(error => this.showSuccess("error !"));
+  }
+  checkiduser() {
+    return this.afAuth.auth.currentUser.uid;
+    /// this.authState.subscribe(auth => console.log(auth.getInstance().getCurrentUser().getUid()));
   }
 }
