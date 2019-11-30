@@ -1,0 +1,39 @@
+login
+
+chauffeur / client
+ =========================
+ client
+ =========================
+reservation de taxi 
+detail :
+destination
+source 
+
+
+historique
+detail :
+destination
+source 
+date
+
+
+ =========================
+ chauffeur
+ =========================
+liste de reservation
+1
+detail :
+destination
+source 
+2
+detail :
+destination
+source 
+
+historique
+detail :
+destination
+source 
+date
+
+

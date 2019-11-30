@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>
+      <div class="ion-text-center " style="color: black;">
+        <strong>
+          <i class="fas fa-taxi"></i>
+          TaxiTunisie</strong>
+
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- <ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{item.name}}
+  </li>
+</ul> -->
+
+
+<ion-content class="ion-padding">
+
+
+
+
+  <ion-card>
+
+    <img src="../../../assets/img/taxi.jpg" />
+    <ion-card-content>
+
+      <ion-grid>
+
+
+        <ion-row>
+          <ion-col>
+            <h1> <strong>Connectez-vous avec vos identifiants</strong></h1>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col>
+            <form [formGroup]="loginForm" (submit)="loginUser()" novalidate>
+
+              <ion-label stacked>Email</ion-label>
+              <ion-input formControlName="email" type="email" placeholder="username@domain.com"
+                [class.invalid]="!loginForm.controls.email.valid && loginForm.controls.email.dirty"></ion-input>
+
+
+
+
+              <ion-label stacked>Mot de passe</ion-label>
+              <ion-input formControlName="password" type="password" placeholder="password"
+                [class.invalid]="!loginForm.controls.password.valid && loginForm.controls.password.dirty"></ion-input>
+
+
+
+              <ion-button expand="block" color="dark" type="submit" [disabled]="!loginForm.valid">S'identifier
+              </ion-button>
+
+            </form>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+
+          <ion-col>
+            <div class="ion-text-center ">ou</div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button expand="block"> Se connecter avec Facebook </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button expand="block" color="danger"> Se connecter avec Google</ion-button>
+          </ion-col>
+        </ion-row>
+
+
+
+      </ion-grid>
+
+      <!--           <i class="fab fa-facebook-square"></i> -->
+
+
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+
+
+  <button color='light' ion-button block (click)="showSuccess()">
+    showSuccess
+  </button>
+
+
+
+
+
+
+  <!-- 
+  <button *ngIf="initState" color='light'ion-button block clear (click)="goToSignup()">
+    Create a new account
+  </button>
+
+  <button *ngIf="initState" color='light' ion-button block clear (click)="goToResetPassword()">
+    I forgot my password
+  </button>
+ -->
+
+
+  <!-- Login To App Section Can Be Found Below -->
+
+  <!--  <div class='o_section'>
+
+  <button *ngIf="!initState" color='light' ion-button block  (click)="loginViaFacebook()">
+      Login With Facebook
+  </button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <button *ngIf="!initState" color='light'ion-button block clear (click)="initState = true">
+              Login
+            </button>
+      </ion-col>
+      <ion-col>
+          <button *ngIf="!initState" color='light'ion-button block clear (click)="goToSignup()">
+              Signup
+            </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+ </div>
+
+   
+  <div class='terms'>
+      Our Terms And Service
+  </div>
+ -->
+
+</ion-content>
