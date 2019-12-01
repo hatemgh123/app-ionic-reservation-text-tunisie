@@ -1,6 +1,9 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
+/src/environments
+
+
 *~
 *.sw[mnpcod]
 .tmp
@@ -12,7 +15,7 @@
 Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
-environment.ts
+
 
 *.log
 log.txt
