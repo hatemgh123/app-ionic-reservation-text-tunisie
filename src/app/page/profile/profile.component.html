@@ -5,33 +5,34 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
+
     <ion-list>
       <ion-item>
         <ion-avatar slot="start">
           <img src="../../../assets/img/avatar.svg">
         </ion-avatar>
         <ion-label>
-          <h2>Hatem ghozzi</h2>
-          <h3>hatem@admin.com</h3>
+          <h2>{{ user.name }}</h2>
+          <h3>{{ user.email }}</h3>
 
         </ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/home')">
+      <ion-item (click)="routpage('client/home')">
 
         <ion-icon name="home" slot="start"></ion-icon>
 
         <ion-label>Accueille</ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/profile')">
+      <ion-item (click)="routpage('client/profile')">
         <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Profile</ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/histoire')">
+      <ion-item (click)="routpage('client/histoire')">
 
         <ion-icon name="time" slot="start"></ion-icon>
         <ion-label>Histoire</ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/login')">
+      <ion-item (click)="routpage('client/login')">
         <ion-icon name="settings" slot="start"></ion-icon>
         <ion-label>Settings</ion-label>
       </ion-item>
@@ -49,64 +50,72 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-
-    <ion-grid>
-
-
-      <ion-row>
-
-        <ion-col class="align-self-center  ">
-
-          <img src="../../../assets/img/avatar.svg" class="center img-profil">
-          <h3 style="text-align: center;"><strong>Hatem ghozzi</strong></h3>
-
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <form [formGroup]="infoprofile" (submit)="modifyProfile()" novalidate>
+      <ion-grid>
 
 
+        <ion-row>
 
+          <ion-col class="align-self-center  ">
 
-    <ion-list>
-      <ion-item>
-        <ion-label>Nom :</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Prenom :</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>E-mail :</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Téléphone :</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Mot de passe :</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-      <ion-item-divider></ion-item-divider>
+            <img src="../../../assets/img/avatar.svg" class="center img-profil">
+            <h3 style="text-align: center;"><strong>{{ user.name }}</strong></h3>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
 
 
 
-
-    </ion-list>
-
-
-
+      <ion-list>
+        <ion-item>
+          <ion-label>Nom :</ion-label>
+          <ion-input formControlName="name"
+            [class.invalid]="!infoprofile.controls.name.valid && infoprofile.controls.name.dirty"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Prenom :</ion-label>
+          <ion-input formControlName="prenom"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>E-mail :</ion-label>
+          <ion-input formControlName="email" type="email"
+            [class.invalid]="!infoprofile.controls.email.valid && infoprofile.controls.email.dirty"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Téléphone :</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Mot de passe :</ion-label>
+          <ion-input formControlName="password" type="password"
+            [class.invalid]="!infoprofile.controls.password.valid && infoprofile.controls.password.dirty"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nouveau Mot de passe :</ion-label>
+          <ion-input formControlName="npassword" type="password"></ion-input>
+        </ion-item>
+        <ion-item-divider></ion-item-divider>
 
 
 
 
 
-    <section class="full-width">
+      </ion-list>
 
-      <ion-button expand="full" color="warning">Modifier profile</ion-button>
-    </section>
+
+
+
+
+
+
+      <section class="full-width">
+
+        <ion-button expand="full" color="warning" type="submit" [disabled]="!infoprofile.valid">Modifier profile
+        </ion-button>
+      </section>
+    </form>
 
 
 

@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
-import { RouteappService } from "src/app/providers/routeapp.service";
+
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { ClientprovidersService } from "src/app/providers/clientproviders.service";
 import { AthuService } from "src/app/providers/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-home",
@@ -12,10 +13,10 @@ import { AthuService } from "src/app/providers/auth.service";
 export class HomeComponent {
   public ajouteres: FormGroup;
   constructor(
-    private rt: RouteappService,
     public formBuilder: FormBuilder,
     private cprovider: ClientprovidersService,
-    athu: AthuService
+    athu: AthuService,
+    private router: Router
   ) {
     this.ajouteres = formBuilder.group({
       Depart: [
@@ -37,7 +38,7 @@ export class HomeComponent {
   }
 
   routpage(url) {
-    this.rt.routpage([url]);
+    this.router.navigate([url]);
   }
 
   ajoutereservation() {

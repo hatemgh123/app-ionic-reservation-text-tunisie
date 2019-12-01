@@ -21,9 +21,11 @@ export class ClientprovidersService {
     private router: Router
   ) {
     this.itemsCollection = db.collection<reservation>("reservation");
-    this.listereservation = db
-      .collection<reservation>("reservation")
-      .valueChanges();
+    this.listereservation = this.getAllDocs();
+  }
+  getAllDocs() {
+    const ref = this.db.collection<reservation>("reservation");
+    return ref.valueChanges({ idField: "customIdName" });
   }
   ajoutereservation(res: reservation) {
     this.itemsCollection.add(res);

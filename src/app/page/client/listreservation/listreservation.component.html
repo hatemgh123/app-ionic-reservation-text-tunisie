@@ -11,26 +11,26 @@
           <img src="../../../assets/img/avatar.svg">
         </ion-avatar>
         <ion-label>
-          <h2>Hatem ghozzi</h2>
-          <h3>hatem@admin.com</h3>
+          <h2>{{ user.name }}</h2>
+          <h3>{{ user.email }}</h3>
 
         </ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/home')">
+      <ion-item (click)="routpage('client/home')">
 
         <ion-icon name="home" slot="start"></ion-icon>
 
         <ion-label>Accueille</ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/profile')">
+      <ion-item (click)="routpage('client/profile')">
         <ion-icon name="person" slot="start"></ion-icon>
         <ion-label>Profile</ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/histoire')">
+      <ion-item (click)="routpage('client/histoire')">
         <ion-icon name="time" slot="start"></ion-icon>
         <ion-label>Histoire</ion-label>
       </ion-item>
-      <ion-item (click)="routpage('/login')">
+      <ion-item (click)="routpage('client/login')">
         <ion-icon name="settings" slot="start"></ion-icon>
         <ion-label>Settings</ion-label>
       </ion-item>
@@ -54,7 +54,7 @@
 
       <ion-card *ngFor="let reservation of reservations; let i = index">
         <ion-item>
-          <ion-label>ID : {{reservation.iduser}}</ion-label>
+          <ion-label>ID :{{reservation.customIdName}}</ion-label>
 
           <ion-badge slot="end" color="danger">{{reservation.stats}}</ion-badge>
         </ion-item>

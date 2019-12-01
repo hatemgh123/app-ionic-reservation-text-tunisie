@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { RouteappService } from "src/app/providers/routeapp.service";
+
 import { ClientprovidersService } from "src/app/providers/clientproviders.service";
-import { reservation } from "src/app/providers/type-object";
+import { reservation, profile } from "src/app/providers/type-object";
 import { Observable } from "rxjs";
 import { Router } from "@angular/router";
+import { AthuService } from "src/app/providers/auth.service";
+
 @Component({
   selector: "app-listreservation",
   templateUrl: "./listreservation.component.html",
@@ -11,17 +13,19 @@ import { Router } from "@angular/router";
 })
 export class ListreservationComponent implements OnInit {
   public listereservation$: Observable<reservation[]> = null;
+  public user: profile;
   constructor(
-    private rt: RouteappService,
     private cprovider: ClientprovidersService,
-    private router: Router
+    private router: Router,
+    private athu: AthuService
   ) {
+    this.user = athu.infouser();
     this.listereservation$ = this.cprovider.listereservation;
   }
 
   ngOnInit() {}
   routpage(url) {
-    this.rt.routpage([url]);
+    this.router.navigate([url]);
   }
   ajoute() {
     this.router.navigate(["/client/ajoute"]);

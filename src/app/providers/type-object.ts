@@ -9,3 +9,10 @@ export class reservation {
   state: string;
   iduser: string;
 }
+export class profile {
+  name: String;
+  email: string;
+  photoUrl: string;
+  emailVerified: boolean;
+  uid: string;
+}
