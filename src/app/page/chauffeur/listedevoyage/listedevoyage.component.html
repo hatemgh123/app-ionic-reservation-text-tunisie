@@ -1,0 +1,235 @@
+<ion-menu side="start" menuId="first">
+  <ion-header>
+    <ion-toolbar translucent color="warning">
+      <ion-title>liste de reservation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../../assets/img/avatar.svg">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ user.name }}</h2>
+          <h3>{{ user.email }}</h3>
+
+        </ion-label>
+      </ion-item>
+      <ion-item (click)="routpage('chauffeur/home')">
+
+        <ion-icon name="home" slot="start"></ion-icon>
+
+        <ion-label>Accueille</ion-label>
+      </ion-item>
+      <ion-item (click)="routpage('chauffeur/profile')">
+        <ion-icon name="person" slot="start"></ion-icon>
+        <ion-label>Profile</ion-label>
+      </ion-item>
+      <ion-item (click)="routpage('chauffeur/histoire')">
+        <ion-icon name="time" slot="start"></ion-icon>
+        <ion-label>Histoire</ion-label>
+      </ion-item>
+      <ion-item (click)="logout()">
+
+        <ion-icon class="fas fa-sign-out-alt" slot="start" style="    padding-left: 5px;"></ion-icon>
+        <ion-label>déconnecter</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+
+
+
+
+<div class="ion-page" main>
+  <ion-header>
+    <ion-toolbar color="warning">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>liste de reservation</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+
+
+
+
+
+  <ion-content class="ion-padding">
+
+
+
+    <h1><strong>Mon Liste De demonde De voyage en attente d'acceptation</strong></h1>
+
+    <ng-container *ngIf="(listereservation$ | async) as reservations; else loading">
+
+      <ng-container *ngFor="let reservation of reservations; let i = index">
+
+        <ng-container *ngFor="let demondes of listedemondedeChauffeur$ | async; let j = index">
+          <ion-card *ngIf="demondes.iddemonde==reservation.customIdName && demondes.stats!='compléter' ">
+            <ion-item>
+              <ion-label>ID :{{ reservation.customIdName }}</ion-label>
+
+              <ion-badge slot="end" [color]="  reservation.stats!='compléter'  ? 'warning' : 'success'">
+                {{ reservation.stats }}</ion-badge>
+            </ion-item>
+
+            <ion-item>
+
+              <ion-button size="small" slot="end" color="danger" (click)="deleteinvite(demondes.customIdName )">
+                <ion-icon name="close"></ion-icon>
+              </ion-button>
+              <ion-label>iduser :{{reservation.iduser}}</ion-label>
+
+
+
+            </ion-item>
+            <ion-item>
+              <ion-icon name="arrow-dropdown-circle" class="st" slot="start"></ion-icon>
+              <ion-label>{{reservation.Arrivee }}</ion-label>
+
+            </ion-item>
+
+            <ion-item>
+              <ion-icon name="pin" class="ed" slot="start"></ion-icon>
+              <ion-label>{{reservation.Depart }}</ion-label>
+
+            </ion-item>
+
+            <ion-item>
+
+              <ion-label>{{reservation.date }}</ion-label>
+
+              <img src="../../../../assets/img/cars-icon-10.jpg" alt="" class="img-car" slot="end">
+
+            </ion-item>
+
+            <!--     <ion-card-content>
+            nom de chauffer : samir
+          </ion-card-content> -->
+
+          </ion-card>
+
+        </ng-container>
+
+      </ng-container>
+
+    </ng-container>
+    <ng-template #loading>
+      <div class="col-12 text-center">
+        <!--  <app-loading-spinners></app-loading-spinners> -->
+        <div class="text-menuted">Loading...</div>
+      </div>
+    </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h1><strong>Tous La Liste De voyage </strong></h1>
+
+    <ng-container *ngIf="(listereservation$ | async) as reservations; else loading">
+
+
+      <ng-container *ngFor="let reservation of reservations; let i = index">
+
+        <ion-card *ngIf="  reservation.stats!='compléter'  ">
+          <ion-item>
+            <ion-label>ID :{{ reservation.customIdName }} </ion-label>
+
+
+            <ion-button size="small" slot="end" color="primary"
+              (click)="presentAlertConfirm(reservation.customIdName,reservation.iduser ,reservation.Depart,reservation.Arrivee) ">
+              invite
+            </ion-button>
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label>iduser :{{ reservation.iduser }}</ion-label>
+
+
+
+          </ion-item>
+          <ion-item>
+            <ion-icon name="arrow-dropdown-circle" class="st" slot="start"></ion-icon>
+            <ion-label>{{ reservation.Arrivee }} </ion-label>
+
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="pin" class="ed" slot="start"></ion-icon>
+            <ion-label>{{ reservation.Depart }} </ion-label>
+
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label>{{reservation.date }}</ion-label>
+
+            <img src="../../../../assets/img/cars-icon-10.jpg" alt="" class="img-car" slot="end">
+
+          </ion-item>
+
+          <!--     <ion-card-content>
+              nom de chauffer : samir
+            </ion-card-content> -->
+
+        </ion-card>
+
+
+
+      </ng-container>
+
+    </ng-container>
+    <ng-template #loading>
+      <div class="col-12 text-center">
+        <!--  <app-loading-spinners></app-loading-spinners> -->
+        <div class="text-menuted">Loading...</div>
+      </div>
+    </ng-template>
+
+
+
+
+
+
+  </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>

@@ -1,3 +1,97 @@
-<p>
-  signup works!
-</p>
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>
+      <div class="ion-text-center " style="color: black;">
+        <strong>
+          <i class="fas fa-taxi"></i>
+          BanzartToBingerden</strong>
+
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- <ul>
+    <li class="text" *ngFor="let item of items | async">
+      {{item.name}}
+    </li>
+  </ul> -->
+
+
+<ion-content class="ion-padding">
+
+
+
+
+  <ion-card>
+
+    <img src="../../../assets/img/taxi.jpg" />
+    <ion-card-content>
+
+      <ion-grid>
+
+
+        <ion-row>
+          <ion-col>
+            <h1> <strong>inscription avec email et mot de passe</strong></h1>
+          </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+          <ion-col>
+            <form [formGroup]="signupForm" (submit)="signup()" novalidate>
+              <ion-label stacked>Nom</ion-label>
+              <ion-input formControlName="nom" type="text" placeholder="User123"
+                [class.invalid]="!signupForm.controls.nom.valid && signupForm.controls.nom.dirty"></ion-input>
+              <ion-label stacked>Email</ion-label>
+              <ion-input formControlName="email" type="email" placeholder="username@domain.com"
+                [class.invalid]="!signupForm.controls.email.valid && signupForm.controls.email.dirty"></ion-input>
+
+
+
+
+              <ion-label stacked>Mot de passe</ion-label>
+              <ion-input formControlName="password" type="password" placeholder="password"
+                [class.invalid]="!signupForm.controls.password.valid && signupForm.controls.password.dirty"></ion-input>
+
+              <ion-label stacked>repete le mot de passe</ion-label>
+              <ion-input formControlName="rpassword" type="password" placeholder="password"
+                [class.invalid]="!signupForm.controls.rpassword.valid && signupForm.controls.rpassword.dirty">
+              </ion-input>
+
+
+
+              <ion-button expand="block" color="dark" type="submit" [disabled]="!signupForm.valid">inscription
+              </ion-button>
+
+            </form>
+          </ion-col>
+        </ion-row>
+
+
+
+
+      </ion-grid>
+
+      <!--           <i class="fab fa-facebook-square"></i> -->
+
+
+
+
+
+
+    </ion-card-content>
+  </ion-card>
+
+  <strong>Vous avez déjà un compte ? <button color='light' ion-button block (click)="signin()">
+      se connecter
+    </button> </strong>
+
+
+
+
+
+
+
+
+</ion-content>

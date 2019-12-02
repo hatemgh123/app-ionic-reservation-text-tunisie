@@ -30,7 +30,7 @@ export class ClientprovidersService {
   ajoutereservation(res: reservation) {
     this.itemsCollection.add(res);
     this.showSuccess("la reservation il été ajoute");
-    this.router.navigate(["/home"]);
+    this.router.navigate(["client/home"]);
   }
 
   async showSuccess(msg) {

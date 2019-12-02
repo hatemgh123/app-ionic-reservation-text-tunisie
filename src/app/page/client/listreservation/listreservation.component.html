@@ -30,9 +30,10 @@
         <ion-icon name="time" slot="start"></ion-icon>
         <ion-label>Histoire</ion-label>
       </ion-item>
-      <ion-item (click)="routpage('client/login')">
-        <ion-icon name="settings" slot="start"></ion-icon>
-        <ion-label>Settings</ion-label>
+      <ion-item (click)="logout()">
+
+        <ion-icon class="fas fa-sign-out-alt" slot="start" style="    padding-left: 5px;"></ion-icon>
+        <ion-label>déconnecter</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
@@ -48,47 +49,89 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
+
+
+    <ng-container *ngIf="(listedemondedeChauffeur$ | async) as demondes; else loading">
+      <ng-container *ngFor="let demonde of demondes; let i = index">
+        <ion-list *ngIf="demonde.idclient==iduser && demonde.stats!='compléter'">
+
+          <ion-list-header>
+            Mon Liste de Invitations
+          </ion-list-header>
+
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="../../../assets/img/avatar.svg">
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ demonde.namedChauffeur }}</h2>
+              <h3> {{  demonde.currDate.toDate() | date:'medium'}}</h3>
+              <p>je suis disponible à votre voyage {{ demonde.dp }} a {{ demonde.ar }} </p>
+              <ion-button size="small" slot="end" color="primary"
+                (click)="confirmedemonde(demonde.iddemonde,demonde.customIdName)">
+                confirmer
+              </ion-button>
+
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+    </ng-container>
+    <ng-template #loading>
+      <div class="col-12 text-center">
+        <!--  <app-loading-spinners></app-loading-spinners> -->
+        <div class="text-menuted">Loading...</div>
+      </div>
+    </ng-template>
+
+
+
     <h1><strong>mon liste de reservation de taxi</strong></h1>
 
     <ng-container *ngIf="(listereservation$ | async) as reservations; else loading">
+      <ng-container *ngFor="let reservation of reservations; let i = index">
+        <ng-container *ngIf="reservation.iduser==iduser ">
+          <ion-card *ngIf="reservation.stats!='Complète' ">
+            <ion-item>
+              <ion-label>ID :{{reservation.customIdName}}</ion-label>
 
-      <ion-card *ngFor="let reservation of reservations; let i = index">
-        <ion-item>
-          <ion-label>ID :{{reservation.customIdName}}</ion-label>
+              <ion-badge slot="end" color="danger">{{reservation.stats}}</ion-badge>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="arrow-dropdown-circle" class="st" slot="start"></ion-icon>
+              <ion-label>{{reservation.Arrivee }}</ion-label>
 
-          <ion-badge slot="end" color="danger">{{reservation.stats}}</ion-badge>
-        </ion-item>
-        <ion-item>
-          <ion-icon name="arrow-dropdown-circle" class="st" slot="start"></ion-icon>
-          <ion-label>{{reservation.Arrivee }}</ion-label>
+            </ion-item>
 
-        </ion-item>
+            <ion-item>
+              <ion-icon name="pin" class="ed" slot="start"></ion-icon>
+              <ion-label>{{reservation.Depart }}</ion-label>
 
-        <ion-item>
-          <ion-icon name="pin" class="ed" slot="start"></ion-icon>
-          <ion-label>{{reservation.Depart }}</ion-label>
+            </ion-item>
 
-        </ion-item>
+            <ion-item>
 
-        <ion-item>
+              <ion-label>{{reservation.date }}</ion-label>
 
-          <ion-label>{{reservation.date }}</ion-label>
+              <img src="../../../../assets/img/cars-icon-10.jpg" alt="" class="img-car" slot="end">
 
-          <img src="../../../../assets/img/cars-icon-10.jpg" alt="" class="img-car" slot="end">
+            </ion-item>
 
-        </ion-item>
-
-        <!--     <ion-card-content>
+            <!--     <ion-card-content>
           nom de chauffer : samir
         </ion-card-content> -->
 
-      </ion-card>
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button color="warning" (click)="ajoute()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
+          </ion-card>
 
+        </ng-container>
+
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+          <ion-fab-button color="warning" (click)="ajoute()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ng-container>
     </ng-container>
     <ng-template #loading>
       <div class="col-12 text-center">

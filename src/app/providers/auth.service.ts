@@ -33,13 +33,30 @@ export class AthuService {
     });
     toast.present();
   }
-
+  signup(form) {
+    if (form.password != form.rpassword) {
+      this.showSuccess("votre mot de passe n'est pas le même");
+    } else {
+      this.afAuth.auth
+        .createUserWithEmailAndPassword(form.email, form.password)
+        .then(result => {
+          this.showSuccess("bienvenue sur BanzartToBingerden :)");
+          this.router.navigate(["client/home"]);
+          return result.user.updateProfile({
+            displayName: form.nom
+          });
+        })
+        .catch(error => {
+          this.showSuccess(error);
+        });
+    }
+  }
   emailLogin(form) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(form.email, form.password)
       .then(user => {
         this.showSuccess("Your settings have been saved.");
-        this.router.navigate(["/home"]);
+        this.router.navigate(["client/home"]);
       })
       .catch(error => this.showSuccess("error !"));
   }
@@ -48,17 +65,6 @@ export class AthuService {
     /// this.authState.subscribe(auth => console.log(auth.getInstance().getCurrentUser().getUid()));
   }
   infouser(): profile {
-    /*     let profiles: profile;
-    if ( this.afAuth.auth.currentUser != null) {
-      profiles.displayName =  this.afAuth.auth.currentUser.displayName;
-      profiles.email =  this.afAuth.auth.currentUser.email;
-      profiles.photoUrl =  this.afAuth.auth.currentUser.photoURL;
-      profiles.emailVerified =  this.afAuth.auth.currentUser.emailVerified;
-      profiles.uid =  this.afAuth.auth.currentUser.uid;
-      // The user's ID, unique to the Firebase project. Do NOT use
-      // this value to authenticate with your backend server, if
-      // you have one. Use User.getToken() instead.
-    } */
     var name: string,
       email: string,
       photoUrl: string,
@@ -114,5 +120,11 @@ export class AthuService {
       .catch(error => {
         this.showSuccess(error);
       });
+  }
+
+  logout() {
+    this.afAuth.auth.signOut().then(() => {
+      this.router.navigate(["login"]);
+    });
   }
 }

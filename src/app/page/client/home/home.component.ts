@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { ClientprovidersService } from "src/app/providers/clientproviders.service";
 import { AthuService } from "src/app/providers/auth.service";
 import { Router } from "@angular/router";
+import { profile } from "src/app/providers/type-object";
 
 @Component({
   selector: "app-home",
@@ -12,12 +13,14 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent {
   public ajouteres: FormGroup;
+  public user: profile;
   constructor(
     public formBuilder: FormBuilder,
     private cprovider: ClientprovidersService,
-    athu: AthuService,
+    private athu: AthuService,
     private router: Router
   ) {
+    this.user = athu.infouser();
     this.ajouteres = formBuilder.group({
       Depart: [
         "",
@@ -49,5 +52,8 @@ export class HomeComponent {
     this.cprovider.ajoutereservation(this.ajouteres.value);
 
     ///  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value))
+  }
+  logout() {
+    this.athu.logout();
   }
 }

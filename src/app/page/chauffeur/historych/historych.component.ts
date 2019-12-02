@@ -1,27 +1,29 @@
 import { Component, OnInit } from "@angular/core";
 
-import { ClientprovidersService } from "src/app/providers/clientproviders.service";
 import { reservation, profile } from "src/app/providers/type-object";
 import { Observable } from "rxjs";
 import { AthuService } from "src/app/providers/auth.service";
 import { Router } from "@angular/router";
+import { ChauffeurprovidersService } from "src/app/providers/chauffeurproviders.service";
 @Component({
-  selector: "app-history",
-  templateUrl: "./history.component.html",
-  styleUrls: ["./history.component.scss"]
+  selector: "app-historych",
+  templateUrl: "./historych.component.html",
+  styleUrls: ["./historych.component.scss"]
 })
-export class HistoryComponent implements OnInit {
+export class HistorychComponent implements OnInit {
   public listereservation$: Observable<reservation[]> = null;
   public user: profile;
   public iduser: string;
+  public listedemondedeChauffeur$: Observable<any[]> = null;
   constructor(
-    private cprovider: ClientprovidersService,
     private athu: AthuService,
-    private router: Router
+    private router: Router,
+    private chprovider: ChauffeurprovidersService
   ) {
-    this.listereservation$ = this.cprovider.listereservation;
+    this.listereservation$ = this.chprovider.listereservation;
     this.user = athu.infouser();
     this.iduser = athu.checkiduser();
+    this.listedemondedeChauffeur$ = this.chprovider.listedemondedeChauffeur;
   }
 
   ngOnInit() {}

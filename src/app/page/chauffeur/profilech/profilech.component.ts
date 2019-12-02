@@ -3,13 +3,14 @@ import { Component } from "@angular/core";
 import { AthuService } from "src/app/providers/auth.service";
 import { profile } from "src/app/providers/type-object";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+
 import { Router } from "@angular/router";
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.scss"]
+  selector: "app-profilech",
+  templateUrl: "./profilech.component.html",
+  styleUrls: ["./profilech.component.scss"]
 })
-export class ProfileComponent {
+export class ProfilechComponent {
   public infoprofile: FormGroup;
   public user: profile;
   name: any;
