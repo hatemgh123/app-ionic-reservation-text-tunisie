@@ -11,6 +11,7 @@ import { Router } from "@angular/router";
 })
 export class SignupComponent implements OnInit {
   public signupForm: FormGroup;
+  public rolsuser: string = "client";
 
   constructor(
     public formBuilder: FormBuilder,
@@ -37,13 +38,17 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
+  radioGroupChange(event) {
+    this.rolsuser = event.detail.value;
+  }
+
   signup(): void {
     if (!this.signupForm.valid) {
       console.log(this.signupForm.value);
       return;
     }
 
-    this.AthuService.signup(this.signupForm.value);
+    this.AthuService.signup(this.signupForm.value, this.rolsuser);
   }
   signin() {
     this.router.navigate(["/login"]);

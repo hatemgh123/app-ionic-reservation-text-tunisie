@@ -62,7 +62,7 @@ export class ListedevoyageComponent implements OnInit {
   async presentAlertConfirm(iddemonde, idclient, dp, ar) {
     const alert = await this.alertController.create({
       header: "Confirm!",
-      message: "Message <strong>text</strong>!!!",
+      message: "confermer <strong>" + iddemonde + "</strong>!!!",
       buttons: [
         {
           text: "Cancel",

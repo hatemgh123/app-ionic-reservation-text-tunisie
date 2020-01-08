@@ -13,6 +13,7 @@ import { SignupComponent } from "./page/signup/signup.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireFunctionsModule } from "@angular/fire/functions";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "../environments/environment";
@@ -49,6 +50,7 @@ import { ProfilechComponent } from "./page/chauffeur/profilech/profilech.compone
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
+    AngularFireFunctionsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(),
     AppRoutingModule

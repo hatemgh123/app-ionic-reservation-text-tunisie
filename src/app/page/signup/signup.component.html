@@ -59,6 +59,21 @@
                 [class.invalid]="!signupForm.controls.rpassword.valid && signupForm.controls.rpassword.dirty">
               </ion-input>
 
+              <ion-radio-group (ionChange)="radioGroupChange($event)">
+
+                <ion-item>
+                  <ion-label>Client</ion-label>
+                  <ion-radio slot="start" color="danger" value="client" checked></ion-radio>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label>Chauffeur</ion-label>
+                  <ion-radio slot="start" color="danger" value="chauffeur"></ion-radio>
+                </ion-item>
+
+
+              </ion-radio-group>
+
 
 
               <ion-button expand="block" color="dark" type="submit" [disabled]="!signupForm.valid">inscription

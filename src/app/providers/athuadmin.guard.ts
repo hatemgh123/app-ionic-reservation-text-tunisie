@@ -22,9 +22,18 @@ export class AthuadminGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
     return new Promise(resolve => {
-      this.Athu.authState.subscribe(auth => {
-        if (auth) resolve(true);
-        else this.router.navigate(["login"]);
+      if (this.Athu.checkAdmin() == null) {
+        this.router.navigate(["client/home"]);
+      }
+      this.Athu.checkAdmin().then(idTokenResult => {
+        // Confirm the user is an Admin.
+
+        if (!idTokenResult.claims.admin) {
+          console.log(idTokenResult.claims);
+          resolve(true);
+        } else {
+          this.router.navigate(["client/home"]);
+        }
       });
     });
   }

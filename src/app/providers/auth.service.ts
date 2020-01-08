@@ -10,6 +10,8 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { profile } from "./type-object";
+import { FunctionsService } from "./functions.service";
+
 @Injectable({
   providedIn: "root"
 })
@@ -21,6 +23,7 @@ export class AthuService {
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
     private router: Router,
+    private funs: FunctionsService,
 
     public toastController: ToastController
   ) {
@@ -33,15 +36,20 @@ export class AthuService {
     });
     toast.present();
   }
-  signup(form) {
+  signup(form, rolsuser) {
     if (form.password != form.rpassword) {
       this.showSuccess("votre mot de passe n'est pas le même");
     } else {
       this.afAuth.auth
         .createUserWithEmailAndPassword(form.email, form.password)
         .then(result => {
+          if (rolsuser == "chauffeur") {
+            this.funs.AddChauffeur(form.email);
+          } else {
+            this.router.navigate(["client/home"]);
+          }
           this.showSuccess("bienvenue sur BanzartToBingerden :)");
-          this.router.navigate(["client/home"]);
+
           return result.user.updateProfile({
             displayName: form.nom
           });
@@ -51,6 +59,7 @@ export class AthuService {
         });
     }
   }
+
   emailLogin(form) {
     return this.afAuth.auth
       .signInWithEmailAndPassword(form.email, form.password)
@@ -62,6 +71,10 @@ export class AthuService {
   }
   checkiduser() {
     return this.afAuth.auth.currentUser.uid;
+    /// this.authState.subscribe(auth => console.log(auth.getInstance().getCurrentUser().getUid()));
+  }
+  checkAdmin() {
+    return this.afAuth.auth.currentUser.getIdTokenResult();
     /// this.authState.subscribe(auth => console.log(auth.getInstance().getCurrentUser().getUid()));
   }
   infouser(): profile {

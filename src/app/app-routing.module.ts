@@ -11,9 +11,14 @@ import { ListreservationComponent } from "./page/client/listreservation/listrese
 import { ListedevoyageComponent } from "./page/chauffeur/listedevoyage/listedevoyage.component";
 import { HistorychComponent } from "./page/chauffeur/historych/historych.component";
 import { ProfilechComponent } from "./page/chauffeur/profilech/profilech.component";
+import { AthuadminGuard } from "./providers/athuadmin.guard";
 
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
+  {
+    path: "",
+
+    component: LoginComponent
+  },
 
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
@@ -33,7 +38,7 @@ const routes: Routes = [
   {
     path: "chauffeur",
 
-    canActivate: [AuthGuard],
+    canActivate: [AthuadminGuard],
     children: [
       { path: "home", component: ListedevoyageComponent },
       { path: "profile", component: ProfilechComponent },
